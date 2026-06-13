@@ -122,6 +122,45 @@ try:
     #Limite superior
     # É uma medida que vai identificar como outliers, os valores acima dele 
     limite_superior = q3 + (1.5 * iqr)
-except Exception as e:
-    print(f'Erro ao calcular Outliers: {e}')
 
+    print('\nMedidas ')
+    print(30*'=')
+    print(f'Mínimo: {minimo}')
+    print(f'Limite Inferior: {limite_inferior}')
+    print(f'Q1: {q1}')
+    print(f'Mediana: {mediana_roubo_veiculo}') #q2
+    print(f'Q3: {q3}')
+    print(f'Limite Superior: {limite_superior}')
+    print(f'Máximo: {maximo}')
+
+
+except Exception as e:
+    print(f'Erro ao calcular os limites: {e}')
+
+#Exibindo os outliers
+    
+try:
+    #Outliers Superiores
+    df_roubo_veiculo_outliers_superiores = df_roubo_veiculo[df_roubo_veiculo['roubo_veiculo'] > limite_superior] # pegar valores acima do limite superior = outliers
+
+    #Outliers Inferiores
+    df_roubo_veiculo_outliers_inferiores = df_roubo_veiculo[df_roubo_veiculo['roubo_veiculo'] < limite_inferior] # pegar valores abaixo do limite inferior = outliers
+
+    print('\nMunicípios Outliers Inferiores ')
+    print(30*'=')
+    # 'len' olha o tamanho de uma lista e vê o tamanho da série ou o número de itens
+    if len(df_roubo_veiculo_outliers_inferiores) == 0: #se não tiver nada é porque é igual a zero
+        print('Não existe outliers inferiores')
+    else:
+        print(df_roubo_veiculo_outliers_inferiores.sort_values(by='roubo_veiculo', ascending=True))
+
+
+    print('\nMunicípios c/ Outliers Superiores ')
+    print(30*"=")
+    if len(df_roubo_veiculo_outliers_superiores) == 0:
+        print('Não existe outliers superiores')
+    else:
+        print(df_roubo_veiculo_outliers_superiores.sort_values(by='roubo_veiculo', ascending=False))
+
+except Exception as e:
+    print(f'Erro ao Calular Outliers {e}')

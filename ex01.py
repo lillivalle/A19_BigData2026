@@ -155,7 +155,6 @@ try:
         print(df_roubo_veiculo_outliers_inferiores.sort_values(by='roubo_veiculo', ascending=True))
 
 
-
     print('\nMunicípios c/ Outliers Superiores ')
     print(30*"=")
     if len(df_roubo_veiculo_outliers_superiores) == 0:
